@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "beautify-benchmark": "^0.2.4",
+    "benchmark": "^2.1.4",
+    "travis-benchmark": "^0.0.0"
+  }
+}
