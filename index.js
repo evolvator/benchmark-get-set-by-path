@@ -5,7 +5,9 @@ var beauty = require('beautify-benchmark');
 var suite = new Benchmark.Suite(`Demo suite`);
 
 for (var i = 0; i < 5; i++) {
-  suite.add('Demo test', function() {});
+  suite.add('Demo test', function() {
+    for (var w = 0; w < i * 10000; w++) {};
+  });
 }
 
 suite.on('cycle', function (event) { beauty.add(event.target); });
