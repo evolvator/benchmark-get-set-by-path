@@ -46,14 +46,16 @@ async.timesSeries(
         value;
       });
     });
-    suite.add('async.forEach', function() {
-      async.forEach(array, function(value, index) {
+    suite.add('async.forEachOf', function() {
+      async.forEachOf(array, function(value, index, next) {
         value;
+        next();
       });
     });
-    suite.add('async.forEachSeries', function() {
-      async.forEachSeries(array, function(value, index) {
+    suite.add('async.forEachOfSeries', function() {
+      async.forEachOfSeries(array, function(value, index, next) {
         value;
+        next();
       });
     });
 
