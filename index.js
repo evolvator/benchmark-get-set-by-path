@@ -1,22 +1,63 @@
 var Benchmark = require('benchmark');
 var tb = require('travis-benchmark');
 var beauty = require('beautify-benchmark');
+var _ = require('lodash');
+var async = require('async');
 
-var suite = new Benchmark.Suite(`Demo suite`);
+async.timesSeries(
+  15,
+  function(t, next) {
+    var count = Math.pow(2, t);
+    var suite = new Benchmark.Suite(`${count} cycles`);
 
-for (var i = 0; i < 5; i++) {
-  suite.add('Demo test', function() {
-    for (var w = 0; w < i * 10000; w++) {};
-  });
-}
+    var array = _.times(count, function(t) {
+      return t;
+    });
 
-suite.on('cycle', function (event) { beauty.add(event.target); });
-suite.on('complete', function(event) {
-  beauty.log();
-  tb.saveSuite(
-    tb.parseSuite(event),
-    function(error) {}
-  );
-});
+    suite.add('for', function() {
+      for (var i = 0; i < count; i++) {
+        array[i];
+      };
+    });
+    suite.add('while', function() {
+      var i = 0;
+      while (i < count) {
+        i++;
+        array[i];
+      }
+    });
+    suite.add('for-in', function() {
+      for (var i in array) {
+        array[i];
+      }
+    });
+    suite.add('for-of', function() {
+      for (var f of array) {
+        f;
+      }
+    });
+    suite.add('forEach', function() {
+      array.forEach(function(value, index) {
+        value;
+      });
+    });
+    suite.add('lodash.forEach', function() {
+      _.forEach(array, function(value, index) {
+        value;
+      });
+    });
 
-suite.run({ async: true });
+    suite.on('cycle', function (event) { beauty.add(event.target); });
+    suite.on('complete', function(event) {
+      beauty.log();
+      tb.saveSuite(
+        tb.parseSuite(event),
+        function(error) {
+          next();
+        }
+      );
+    });
+
+    suite.run({ async: true });
+  }
+);
