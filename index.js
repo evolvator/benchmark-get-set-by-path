@@ -46,6 +46,18 @@ async.timesSeries(
         value;
       });
     });
+    suite.add('async.forEachOf', function() {
+      async.forEachOf(array, function(value, index, next) {
+        value;
+        next();
+      });
+    });
+    suite.add('async.forEachOfSeries', function() {
+      async.forEachOfSeries(array, function(value, index, next) {
+        value;
+        next();
+      });
+    });
 
     suite.on('cycle', function (event) { beauty.add(event.target); });
     suite.on('complete', function(event) {
