@@ -1,6 +1,6 @@
 # benchmark-each-by-array
 
-What's the fastest way to sort through arrays?
+What's the fastest way to each by array?
 
 [![Build Status](https://travis-ci.org/evolvator/benchmark-each-by-array.svg?branch=master)](https://travis-ci.org/evolvator/benchmark-each-by-array)
 
