@@ -9,6 +9,6 @@
     "beautify-benchmark": "^0.2.4",
     "benchmark": "^2.1.4",
     "lodash": "^4.17.10",
-    "travis-benchmark": "^0.0.2"
+    "travis-benchmark": "^0.0.3"
   }
 }
