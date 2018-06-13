@@ -1,10 +1,13 @@
 var Benchmark = require('benchmark');
 var tb = require('travis-benchmark');
 var _ = require('lodash');
-var nestedProperty = require('nested-roperty');
+var nestedProperty = require('nested-property');
 var objectPath = require("object-path");
 
 var object = {"O73RO":{"ZWHKS":{"X3OPE":{"6F4C8":{"53GNL":{"YORMF":{"2CXEF":{"AIPED":{"IDG0W":{"BUOW1":{"TMPJI":"7A7U2"}}}}}}}}}}};
+var maxPath = [];
+for (var pointer = object; typeof pointer == 'object'; pointer = pointer[_.keys(pointer)[0]])
+  maxPath.push(_.keys(pointer)[0]);
 
 var suite = new Benchmark.Suite(`get depth 1 by [object]`);
 
