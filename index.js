@@ -22,7 +22,7 @@ async.timesSeries(
     var suite = new Benchmark.Suite(`get depth ${t+1} by [object]`);
     
     var arrPath = maxPath.slice(0, t + 1);
-    var strPath = strPath.join('.');
+    var strPath = arrPath.join('.');
     
     eval(`suite.add('js (without checking)', function() { object${_.map(arrPath, p => `['${p}']`)}; });`);
     suite.add('lodash@4.17.10 get [string]', function() {
