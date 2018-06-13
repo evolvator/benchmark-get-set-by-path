@@ -5,12 +5,11 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "array-each": "^1.0.1",
     "async": "^2.6.1",
-    "beautify-benchmark": "^0.2.4",
     "benchmark": "^2.1.4",
-    "foreach": "^2.0.5",
     "lodash": "^4.17.10",
-    "travis-benchmark": "^0.0.3"
+    "nested-property": "0.0.7",
+    "object-path": "^0.11.4",
+    "travis-benchmark": "^0.0.5"
   }
 }

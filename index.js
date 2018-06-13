@@ -1,87 +1,31 @@
 var Benchmark = require('benchmark');
 var tb = require('travis-benchmark');
-var beauty = require('beautify-benchmark');
 var _ = require('lodash');
-var async = require('async');
-var foreach = require('foreach');
-var arrayEach = require('array-each');
+var nestedProperty = require('nested-roperty');
+var objectPath = require("object-path");
 
-async.timesSeries(
-  15,
-  function(t, next) {
-    var count = Math.pow(2, t);
-    var suite = new Benchmark.Suite(`${count} array.length`);
+var object = {"O73RO":{"ZWHKS":{"X3OPE":{"6F4C8":{"53GNL":{"YORMF":{"2CXEF":{"AIPED":{"IDG0W":{"BUOW1":{"TMPJI":"7A7U2"}}}}}}}}}}};
 
-    var array = _.times(count, function(t) {
-      return t;
-    });
+var suite = new Benchmark.Suite(`get depth 1 by [object]`);
 
-    suite.add('for', function() {
-      for (var i = 0; i < count; i++) {
-        array[i];
-      };
-    });
-    suite.add('while', function() {
-      var i = 0;
-      while (i < count) {
-        i++;
-        array[i];
-      }
-    });
-    suite.add('for-in', function() {
-      for (var i in array) {
-        array[i];
-      }
-    });
-    suite.add('for-of', function() {
-      for (var f of array) {
-        f;
-      }
-    });
-    suite.add('forEach', function() {
-      array.forEach(function(value, index) {
-        value;
-      });
-    });
-    suite.add('lodash@1.0.1 forEach', function() {
-      _.forEach(array, function(value, index) {
-        value;
-      });
-    });
-    suite.add('async@2.6.1 forEachOf', function() {
-      async.forEachOf(array, function(value, index, next) {
-        value;
-        next();
-      });
-    });
-    suite.add('async@2.6.1 forEachOfSeries', function() {
-      async.forEachOfSeries(array, function(value, index, next) {
-        value;
-        next();
-      });
-    });
-    suite.add('foreach@2.0.5', function() {
-      foreach(array, function(value, index) {
-        value;
-      });
-    });
-    suite.add('array-each@1.0.0', function() {
-      arrayEach(array, function(value, index) {
-        value;
-      });
-    });
+suite.add('js (without checking)', function() {
+  object['O73RO'];
+});
+suite.add('lodash@4.17.10 get [string]', function() {
+  _.get(object, 'O73RO');
+});
+suite.add('lodash@4.17.10 get [array]', function() {
+  _.get(object, ['O73RO']);
+});
+suite.add('nested-property@0.0.7 get', function() {
+  nestedProperty.get(object, 'O73RO');
+});
+suite.add('object-path@0.11.4 get [string]', function() {
+  objectPath.get(object, 'O73RO');
+});
+suite.add('object-path@0.11.4 get [array]', function() {
+  objectPath.get(object, ['O73RO']);
+});
 
-    suite.on('cycle', function (event) { beauty.add(event.target); });
-    suite.on('complete', function(event) {
-      beauty.log();
-      tb.saveSuite(
-        tb.parseSuite(event),
-        function(error) {
-          next();
-        }
-      );
-    });
-
-    suite.run({ async: true });
-  }
-);
+tb.wrapSuite(suite);
+suite.run({ async: true });
