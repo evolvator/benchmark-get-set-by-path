@@ -3,12 +3,14 @@ var tb = require('travis-benchmark');
 var beauty = require('beautify-benchmark');
 var _ = require('lodash');
 var async = require('async');
+var foreach = require('foreach');
+var arrayEach = require('array-each');
 
 async.timesSeries(
   15,
   function(t, next) {
     var count = Math.pow(2, t);
-    var suite = new Benchmark.Suite(`${count} cycles`);
+    var suite = new Benchmark.Suite(`${count} array.length`);
 
     var array = _.times(count, function(t) {
       return t;
@@ -41,21 +43,31 @@ async.timesSeries(
         value;
       });
     });
-    suite.add('lodash.forEach', function() {
+    suite.add('lodash@1.0.1 forEach', function() {
       _.forEach(array, function(value, index) {
         value;
       });
     });
-    suite.add('async.forEachOf', function() {
+    suite.add('async@2.6.1 forEachOf', function() {
       async.forEachOf(array, function(value, index, next) {
         value;
         next();
       });
     });
-    suite.add('async.forEachOfSeries', function() {
+    suite.add('async@2.6.1 forEachOfSeries', function() {
       async.forEachOfSeries(array, function(value, index, next) {
         value;
         next();
+      });
+    });
+    suite.add('foreach@2.0.5', function() {
+      foreach(array, function(value, index) {
+        value;
+      });
+    });
+    suite.add('array-each@1.0.0', function() {
+      arrayEach(array, function(value, index) {
+        value;
       });
     });
 
