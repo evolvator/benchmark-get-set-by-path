@@ -5,7 +5,6 @@ var nestedProperty = require('nested-property');
 var objectPath = require("object-path");
 var async = require('async');
 var objectPathGet = require('object-path-get');
-var getObjectPath = require('get-object-path');
 var getValue = require('get-value');
 var objectResolvePath = require('object-resolve-path');
 var dotty = require('dotty');
@@ -45,9 +44,6 @@ async.timesSeries(
     });
     suite.add('object-path-get@1.0.0 get [array]', function() {
       objectPathGet(object, arrPath);
-    });
-    suite.add('get-object-path@0.0.3 get [string]', function() {
-      getObjectPath(object, strPath);
     });
     suite.add('get-value@3.0.1 get [array]', function() {
       getValue(object, arrPath);

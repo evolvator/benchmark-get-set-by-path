@@ -9,7 +9,6 @@
     "benchmark": "^2.1.4",
     "dot-access": "^1.0.0",
     "dotty": "^0.1.0",
-    "get-object-path": "0.0.3",
     "get-value": "^3.0.1",
     "lodash": "^4.17.10",
     "nested-property": "0.0.7",
