@@ -93,7 +93,7 @@ async.series(
           tb.wrapSuite(suite, () => next());
           suite.run({ async: true });
         },
-        (next) => next()
+        function (next) { next(); },
       );
     },
     function (next) {
@@ -163,7 +163,7 @@ async.series(
           tb.wrapSuite(suite, () => next());
           suite.run({ async: true });
         },
-        (next) => next()
+        function (next) { next(); },
       );
     },
   ]
