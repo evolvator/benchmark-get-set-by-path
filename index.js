@@ -1,12 +1,16 @@
 var Benchmark = require('benchmark');
 var tb = require('travis-benchmark');
 var _ = require('lodash');
+var platform = require('platform');
+
 var nestedProperty = require('nested-property');
 var objectPath = require("object-path");
 var async = require('async');
 var objectPathGet = require('object-path-get');
 var getObjectPath = require('get-object-path');
-var getValue = require('get-value');
+if (!/^5\./.test(platform.version)) {
+  var getValue = require('get-value');
+}
 var objectResolvePath = require('object-resolve-path');
 var dotty = require('dotty');
 var dotAccess = require('dot-access');
@@ -59,12 +63,14 @@ async.series(
           suite.add('get-object-path@0.0.3 get [string]', function() {
             getObjectPath(object, strDotPath);
           });
-          suite.add('get-value@3.0.1 get [array]', function() {
-            getValue(object, arrPath);
-          });
-          suite.add('get-value@3.0.1 get [string]', function() {
-            getValue(object, strDotPath);
-          });
+          if (!/^5\./.test(platform.version)) {
+            suite.add('get-value@3.0.1 get [array]', function() {
+              getValue(object, arrPath);
+            });
+            suite.add('get-value@3.0.1 get [string]', function() {
+              getValue(object, strDotPath);
+            });
+          }
           suite.add('object-resolve-path@1.1.1 get [string]', function() {
             objectResolvePath(object, strSquarePath);
           });
