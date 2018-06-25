@@ -3,6 +3,8 @@ var tb = require('travis-benchmark');
 var _ = require('lodash');
 var platform = require('platform');
 
+var underscoreContrib = require('underscore-contrib');
+
 var nestedProperty = require('nested-property');
 var objectPath = require("object-path");
 var async = require('async');
@@ -44,6 +46,12 @@ async.series(
           });
           suite.add('lodash@4.17.10 get [array]', function() {
             _.get(object, arrPath);
+          });
+          suite.add('underscore-contrib@0.3.0 getPath [string]', function() {
+            underscoreContrib.getPath(object, strDotPath);
+          });
+          suite.add('underscore-contrib@0.3.0 getPath [array]', function() {
+            underscoreContrib.getPath(object, arrPath);
           });
           suite.add('nested-property@0.0.7 get', function() {
             nestedProperty.get(object, strDotPath);
@@ -124,6 +132,14 @@ async.series(
           suite.add('lodash@4.17.10 set [array]', function() {
             var data = {};
             _.set(data, arrPath, 123);
+          });
+          suite.add('underscore-contrib@.3.0 setPath [string]', function() {
+            var data = {};
+            underscoreContrib.setPath(data, strDotPath, 123);
+          });
+          suite.add('underscore-contrib@.3.0 setPath [array]', function() {
+            var data = {};
+            underscoreContrib.setPath(data, arrPath, 123);
           });
           suite.add('nested-property@0.0.7 set', function() {
             var data = {};
