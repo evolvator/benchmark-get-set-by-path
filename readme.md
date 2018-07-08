@@ -2,7 +2,7 @@
 
 What faster get/set by paths?
 
-[![Build Status](https://travis-ci.org/evolvator/benchmark-get-set-by-path.svg?branch=master)](https://travis-ci.org/evolvator/benchmark-get-set-by-path)
+[![Build Status](https://travis-ci.org/evolvator/benchmark-get-set-by-path.svg?branch=code)](https://travis-ci.org/evolvator/benchmark-get-set-by-path)
 
 [Executable code](https://github.com/evolvator/benchmark-get-set-by-path/tree/code)
 
