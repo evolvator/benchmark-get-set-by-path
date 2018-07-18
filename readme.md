@@ -2,6 +2,8 @@
 
 What faster get/set by paths?
 
+## [DEPRICATED](https://github.com/orgs/evolvator/projects?utf8=%E2%9C%93&query=is%3Aclosed+Tasks+v0)
+
 [![Build Status](https://travis-ci.org/evolvator/benchmark-get-set-by-path.svg?branch=code)](https://travis-ci.org/evolvator/benchmark-get-set-by-path)
 
 [Executable code](https://github.com/evolvator/benchmark-get-set-by-path/tree/code)
